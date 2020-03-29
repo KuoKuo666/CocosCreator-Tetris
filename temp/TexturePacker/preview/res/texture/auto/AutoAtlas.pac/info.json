@@ -1,0 +1,261 @@
+{
+  "mtimes": {
+    "2696a60e-93d9-4908-a8e9-c53c2bb494d1": {
+      "assetMtime": 1581492006118,
+      "metaMtime": 1581492006120
+    },
+    "194770d8-dc2c-4509-9d98-73b0961ee10f": {
+      "assetMtime": 1369971020000,
+      "metaMtime": 1581315398902
+    },
+    "49834d1e-6069-48a5-831d-0dfeb17e535b": {
+      "assetMtime": 1369971020000,
+      "metaMtime": 1581315398902
+    },
+    "28923bc1-f50c-45af-b21a-7507c3bb0ce3": {
+      "assetMtime": 1369970976000,
+      "metaMtime": 1581315422645
+    },
+    "0cf8f650-7a16-4a4a-b78b-5f1a74e9e93f": {
+      "assetMtime": 1369970976000,
+      "metaMtime": 1581315422645
+    },
+    "68abf386-0f70-4074-8770-64ffd22784a8": {
+      "assetMtime": 1369971010000,
+      "metaMtime": 1581315403306
+    },
+    "963968d1-4333-4747-8984-5e97d5aa3c4d": {
+      "assetMtime": 1369971010000,
+      "metaMtime": 1581315403306
+    },
+    "6d0f8ed8-cfb9-4c13-88a9-4190c46c9b24": {
+      "assetMtime": 1369970990000,
+      "metaMtime": 1581315417340
+    },
+    "dbbc788a-7577-4a98-b6c6-6535b4309162": {
+      "assetMtime": 1369970990000,
+      "metaMtime": 1581315417340
+    },
+    "7ee37a9f-e669-4676-9c09-1c772d194f6a": {
+      "assetMtime": 1378262264000,
+      "metaMtime": 1581315428781
+    },
+    "a08b5565-2d0f-4408-b48d-87a412edbb4f": {
+      "assetMtime": 1378262264000,
+      "metaMtime": 1581315428781
+    },
+    "a11130b5-14db-40ed-a4b6-783ba1b095a9": {
+      "assetMtime": 1369970962000,
+      "metaMtime": 1581315392864
+    },
+    "80332a73-f1c2-4eda-8c47-bd2309ca181f": {
+      "assetMtime": 1369970962000,
+      "metaMtime": 1581315392864
+    },
+    "d8d9fc1e-7800-4597-8fd1-edeea1123ac6": {
+      "assetMtime": 1369971000000,
+      "metaMtime": 1581315411433
+    },
+    "189f0ae5-b272-47fa-bda4-5c8beb19ff4e": {
+      "assetMtime": 1369971000000,
+      "metaMtime": 1581315411433
+    }
+  },
+  "result": {
+    "name": "AutoAtlas",
+    "width": 1024,
+    "height": 1024,
+    "ver": "1.2.0",
+    "uuid": "2696a60e-93d9-4908-a8e9-c53c2bb494d1",
+    "maxWidth": 1024,
+    "maxHeight": 1024,
+    "padding": 2,
+    "allowRotation": true,
+    "forceSquared": false,
+    "powerOfTwo": false,
+    "algorithm": "MaxRects",
+    "format": "png",
+    "quality": 80,
+    "contourBleed": true,
+    "paddingBleed": true,
+    "filterUnused": false,
+    "packable": false,
+    "premultiplyAlpha": false,
+    "filterMode": "bilinear",
+    "platformSettings": {},
+    "subMetas": {},
+    "bleed": 1,
+    "atlases": [
+      {
+        "files": [
+          {
+            "name": "shape6",
+            "uuid": "194770d8-dc2c-4509-9d98-73b0961ee10f",
+            "textureUuid": "49834d1e-6069-48a5-831d-0dfeb17e535b",
+            "path": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/trimImages/spritesheet_js_1581492009088_image_0.png",
+            "trim": {
+              "x": 3,
+              "y": 3,
+              "width": 69,
+              "height": 63,
+              "rotatedWidth": 69,
+              "rotatedHeight": 63
+            },
+            "rawWidth": 95,
+            "rawHeight": 95,
+            "width": 75,
+            "height": 69,
+            "originalPath": "/Users/kuokuo/Desktop/CCC2D/Tetris/library/imports/49/49834d1e-6069-48a5-831d-0dfeb17e535b.png",
+            "x": 0,
+            "y": 0,
+            "rotatedWidth": 75,
+            "rotatedHeight": 69
+          },
+          {
+            "name": "shape2",
+            "uuid": "28923bc1-f50c-45af-b21a-7507c3bb0ce3",
+            "textureUuid": "0cf8f650-7a16-4a4a-b78b-5f1a74e9e93f",
+            "path": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/trimImages/spritesheet_js_1581492009090_image_1.png",
+            "trim": {
+              "x": 3,
+              "y": 72,
+              "width": 69,
+              "height": 63,
+              "rotatedWidth": 69,
+              "rotatedHeight": 63
+            },
+            "rawWidth": 95,
+            "rawHeight": 95,
+            "width": 75,
+            "height": 69,
+            "originalPath": "/Users/kuokuo/Desktop/CCC2D/Tetris/library/imports/0c/0cf8f650-7a16-4a4a-b78b-5f1a74e9e93f.png",
+            "x": 0,
+            "y": 69,
+            "rotatedWidth": 75,
+            "rotatedHeight": 69
+          },
+          {
+            "name": "shape5",
+            "uuid": "68abf386-0f70-4074-8770-64ffd22784a8",
+            "textureUuid": "963968d1-4333-4747-8984-5e97d5aa3c4d",
+            "path": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/trimImages/spritesheet_js_1581492009090_image_2.png",
+            "trim": {
+              "x": 3,
+              "y": 141,
+              "width": 69,
+              "height": 63,
+              "rotatedWidth": 69,
+              "rotatedHeight": 63
+            },
+            "rawWidth": 95,
+            "rawHeight": 95,
+            "width": 75,
+            "height": 69,
+            "originalPath": "/Users/kuokuo/Desktop/CCC2D/Tetris/library/imports/96/963968d1-4333-4747-8984-5e97d5aa3c4d.png",
+            "x": 0,
+            "y": 138,
+            "rotatedWidth": 75,
+            "rotatedHeight": 69
+          },
+          {
+            "name": "shape3",
+            "uuid": "6d0f8ed8-cfb9-4c13-88a9-4190c46c9b24",
+            "textureUuid": "dbbc788a-7577-4a98-b6c6-6535b4309162",
+            "path": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/trimImages/spritesheet_js_1581492009090_image_3.png",
+            "trim": {
+              "x": 3,
+              "y": 210,
+              "width": 69,
+              "height": 63,
+              "rotatedWidth": 69,
+              "rotatedHeight": 63
+            },
+            "rawWidth": 95,
+            "rawHeight": 95,
+            "width": 75,
+            "height": 69,
+            "originalPath": "/Users/kuokuo/Desktop/CCC2D/Tetris/library/imports/db/dbbc788a-7577-4a98-b6c6-6535b4309162.png",
+            "x": 0,
+            "y": 207,
+            "rotatedWidth": 75,
+            "rotatedHeight": 69
+          },
+          {
+            "name": "shape7",
+            "uuid": "a11130b5-14db-40ed-a4b6-783ba1b095a9",
+            "textureUuid": "80332a73-f1c2-4eda-8c47-bd2309ca181f",
+            "path": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/trimImages/spritesheet_js_1581492009090_image_5.png",
+            "trim": {
+              "x": 3,
+              "y": 279,
+              "width": 69,
+              "height": 63,
+              "rotatedWidth": 69,
+              "rotatedHeight": 63
+            },
+            "rawWidth": 95,
+            "rawHeight": 95,
+            "width": 75,
+            "height": 69,
+            "originalPath": "/Users/kuokuo/Desktop/CCC2D/Tetris/library/imports/80/80332a73-f1c2-4eda-8c47-bd2309ca181f.png",
+            "x": 0,
+            "y": 276,
+            "rotatedWidth": 75,
+            "rotatedHeight": 69
+          },
+          {
+            "name": "shape4",
+            "uuid": "d8d9fc1e-7800-4597-8fd1-edeea1123ac6",
+            "textureUuid": "189f0ae5-b272-47fa-bda4-5c8beb19ff4e",
+            "path": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/trimImages/spritesheet_js_1581492009090_image_6.png",
+            "trim": {
+              "x": 3,
+              "y": 348,
+              "width": 69,
+              "height": 63,
+              "rotatedWidth": 69,
+              "rotatedHeight": 63
+            },
+            "rawWidth": 95,
+            "rawHeight": 95,
+            "width": 75,
+            "height": 69,
+            "originalPath": "/Users/kuokuo/Desktop/CCC2D/Tetris/library/imports/18/189f0ae5-b272-47fa-bda4-5c8beb19ff4e.png",
+            "x": 0,
+            "y": 345,
+            "rotatedWidth": 75,
+            "rotatedHeight": 69
+          },
+          {
+            "name": "shape1",
+            "uuid": "7ee37a9f-e669-4676-9c09-1c772d194f6a",
+            "textureUuid": "a08b5565-2d0f-4408-b48d-87a412edbb4f",
+            "path": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/trimImages/spritesheet_js_1581492009090_image_4.png",
+            "trim": {
+              "x": 3,
+              "y": 417,
+              "width": 69,
+              "height": 62,
+              "rotatedWidth": 69,
+              "rotatedHeight": 62
+            },
+            "rawWidth": 95,
+            "rawHeight": 95,
+            "width": 75,
+            "height": 68,
+            "originalPath": "/Users/kuokuo/Desktop/CCC2D/Tetris/library/imports/a0/a08b5565-2d0f-4408-b48d-87a412edbb4f.png",
+            "x": 0,
+            "y": 414,
+            "rotatedWidth": 75,
+            "rotatedHeight": 68
+          }
+        ],
+        "width": 75,
+        "height": 482,
+        "name": "AutoAtlas-1",
+        "imagePath": "/Users/kuokuo/Desktop/CCC2D/Tetris/temp/TexturePacker/preview/res/texture/auto/AutoAtlas.pac/AutoAtlas-1.png"
+      }
+    ],
+    "unpackedTextures": []
+  }
+}
