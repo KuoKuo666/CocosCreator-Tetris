@@ -8,7 +8,9 @@ var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var Touch = /** @class */ (function (_super) {
     __extends(Touch, _super);
     function Touch() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.aimNode = undefined;
+        return _this;
     }
     Touch.prototype.onLoad = function () {
         this.registerEvent();
@@ -18,9 +20,11 @@ var Touch = /** @class */ (function (_super) {
         this.node.on(cc.Node.EventType.TOUCH_END, function (e) {
             var startPoint = e.getStartLocation();
             var endPonit = e.getLocation();
+            // 起点与终点相减
             var v = endPonit.sub(startPoint);
-            // cc.log(v)
+            // 转弧度
             var radians = Math.atan2(v.y, v.x);
+            // 弧度转角度
             var degrees = cc.misc.radiansToDegrees(radians);
             /** 将角度划分 8 块区域，方便处理，注意恰好 360 度 */
             var index = Math.floor(degrees / 45);
@@ -28,23 +32,26 @@ var Touch = /** @class */ (function (_super) {
         }, this);
     };
     Touch.prototype.emitEventByIndex = function (index) {
-        // main 上有对应监听，注意如果两个脚本没同时绑定在一个节点上，此处就不能用 this.node 了
+        // 8 方向判断
         if (index === 0 || index === -1) {
-            this.node.emit(enum_1.TouchEvent.RIGHT);
+            this.aimNode.emit(enum_1.TouchEvent.RIGHT);
         }
         else if (index === 1 || index === 2) {
-            this.node.emit(enum_1.TouchEvent.UP);
+            this.aimNode.emit(enum_1.TouchEvent.UP);
         }
         else if (index === -2 || index === -3) {
-            this.node.emit(enum_1.TouchEvent.DOWN);
+            this.aimNode.emit(enum_1.TouchEvent.DOWN);
         }
         else if (index === -4 || index === 3 || index === 4) {
-            this.node.emit(enum_1.TouchEvent.LEFT);
+            this.aimNode.emit(enum_1.TouchEvent.LEFT);
         }
         else {
             cc.error("\u65E0\u6B64\u65B9\u5411" + index);
         }
     };
+    __decorate([
+        property(cc.Node)
+    ], Touch.prototype, "aimNode", void 0);
     Touch = __decorate([
         ccclass
     ], Touch);

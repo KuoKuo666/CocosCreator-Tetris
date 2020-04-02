@@ -10,7 +10,7 @@ export enum ItemType {
     SHAPE7,
 }
 
-/** 事件类型枚举 */
+/** 触摸事件-上下左右滑动 */
 export enum TouchEvent {
     UP = 'touch-up',
     DOWN = 'touch-down',

@@ -15,7 +15,7 @@ var ItemType;
     ItemType[ItemType["SHAPE6"] = 6] = "SHAPE6";
     ItemType[ItemType["SHAPE7"] = 7] = "SHAPE7";
 })(ItemType = exports.ItemType || (exports.ItemType = {}));
-/** 事件类型枚举 */
+/** 触摸事件-上下左右滑动 */
 var TouchEvent;
 (function (TouchEvent) {
     TouchEvent["UP"] = "touch-up";
