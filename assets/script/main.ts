@@ -5,11 +5,11 @@ import { TouchEvent, ItemType, NodeUrl, MusicEvent } from "./enum"
 const {ccclass, property} = cc._decorator
 
 export interface CurrentShapeData {
-    /** 指向当前运动形状中心 */
+    /** 指向当前形状中心 */
     center: cc.Vec2,
-    /** 当前形状翻转下标，0-3 */
+    /** 当前颜色形状翻转下标，0-3，可以翻转 4 种形态 */
     index: number,
-    /** 当前形状类型 */
+    /** 什么颜色的方块 */
     type: ItemType
 }
 
@@ -43,11 +43,12 @@ export default class Main extends cc.Component {
     }
 
     start () {
+        // 游戏音乐 BGM
         cc.find(NodeUrl.Music).emit(MusicEvent.BGM)
     }
 
     registerEvent () {
-        // touch 脚本传来事件
+        // touch 脚本传来上下左右事件，上：变形，下：下一个格子，左右：左右移动一个格子
         this.node.on(TouchEvent.UP, () => {
             this.changeCurrentShapeIndex()
         }, this)
@@ -99,6 +100,7 @@ export default class Main extends cc.Component {
             this.setCurrentData(this.currentShape)
             cc.find(NodeUrl.Music).emit(MusicEvent.GAME_OVER)
             this.scheduleOnce(() => {
+                // 显示游戏开始菜单
                 this.startPanel.active = true
             }, 2)
         }
