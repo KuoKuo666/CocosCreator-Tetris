@@ -1,0 +1,24 @@
+// Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.  
+CCEffect %{
+  techniques:
+  - stages:
+      - transparent
+    passes:
+      - vert: unlit-vs
+        frag: unlit-fs
+        depthStencilState:
+          depthTest: true
+          depthWrite: true
+        blendState:
+          targets:
+          - blend: true
+        rasterizerState:
+          cullMode: none
+        properties:
+          diffuseTexture: { value: white }
+          diffuseColor: { value: [1, 1, 1, 1], inspector: { type: color } }
+          alphaThreshold: { value: 0.5 }
+          mainTiling: { value: [1, 1] }
+          mainOffset: { value: [0, 0] }
+}%
+

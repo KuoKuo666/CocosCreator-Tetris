@@ -1,0 +1,47 @@
+
+CCEffect %{
+  techniques:
+  - stages:
+      - transparent
+    passes:
+      - vert: gizmo-unlit-vs
+        frag: gizmo-unlit-fs:front
+        depthStencilState:
+          depthTest: false
+          depthWrite: false
+        blendState:
+          targets:
+          - blend: true
+            blendEq: add
+        rasterizerState:
+          cullMode: none
+        properties:
+          diffuseColor: { value: [1, 1, 1, 1], inspector: { type: color } }
+}%
+
+CCProgram gizmo-unlit-vs %{
+  precision highp float;
+
+  attribute vec3 a_position;
+
+  #include <cc-global>
+  #include <cc-local>
+
+  void main () {
+    gl_Position = cc_matViewProj * cc_matWorld * vec4(a_position, 1);
+  }
+}%
+
+CCProgram gizmo-unlit-fs %{
+  precision highp float;
+  
+  #include <encodings>
+  
+  uniform DIFFUSE_COLOR {
+    vec4 diffuseColor;
+  }
+
+  vec4 front() {
+    return LINEAR_TO_OUTPUT_TEXEL(diffuseColor);
+  }
+}%

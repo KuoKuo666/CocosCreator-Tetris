@@ -31,11 +31,12 @@ var Main = /** @class */ (function (_super) {
         this.registerEvent();
     };
     Main.prototype.start = function () {
+        // 游戏音乐 BGM
         cc.find(enum_1.NodeUrl.Music).emit(enum_1.MusicEvent.BGM);
     };
     Main.prototype.registerEvent = function () {
         var _this = this;
-        // touch 脚本传来事件
+        // touch 脚本传来上下左右事件，上：变形，下：下一个格子，左右：左右移动一个格子
         this.node.on(enum_1.TouchEvent.UP, function () {
             _this.changeCurrentShapeIndex();
         }, this);
@@ -83,6 +84,7 @@ var Main = /** @class */ (function (_super) {
             this.setCurrentData(this.currentShape);
             cc.find(enum_1.NodeUrl.Music).emit(enum_1.MusicEvent.GAME_OVER);
             this.scheduleOnce(function () {
+                // 显示游戏开始菜单
                 _this.startPanel.active = true;
             }, 2);
         }

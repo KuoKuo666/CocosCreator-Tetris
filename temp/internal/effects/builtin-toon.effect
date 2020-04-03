@@ -1,0 +1,233 @@
+// Copyright (c) 2017-2019 Xiamen Yaji Software Co., Ltd.
+
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: outline-vs:vert
+      frag: outline-fs:frag
+      depthStencilState:
+        depthTest: true
+        depthWrite: true
+      rasterizerState:
+        cullMode: front
+      properties:
+        lineWidth:     { value: 10 }
+        depthBias:     { value: 0 }
+        outlineBaseColor:     { value: [0.0, 0.0, 0.0, 1.0], inspector: { type: color } }
+        outlineBaseColorMap:  { value: gray }
+    - vert: toon-vs:vert
+      frag: toon-fs:frag
+      depthStencilState:
+        depthTest: true
+        depthWrite: true
+      properties:
+        tilingOffset:   { value: [1.0, 1.0, 0.0, 0.0] }
+        normalMap:      { value: normal }
+        
+        baseColorMap:   { value: white }
+
+        specular:       { value: [1.0, 1.0, 1.0, 0.5],  inspector: { type: color } }
+        specularMap:    { value: white }
+        specularThreshold: { value: 0.5 }
+
+        emissive:       { value: [0.0, 0.0, 0.0, 1.0],  inspector: { type: color } }
+
+        shadowColor:    { value: [0.0, 0.0, 0.0, 1.0],  inspector: { type: color } }
+        shadowIntensity: { value: 0.5 }
+        highlightColor: { value: [1.0, 1.0, 1.0, 1.0],  inspector: { type: color } }
+
+        lightThreshold: { value: 0.5 }
+        lightSmoothness: { value: 0.1 }
+}%
+
+CCProgram outline-vs %{
+  precision highp float;
+
+  #include <cc-global>
+  #include <cc-local>
+  #include <input-standard>
+
+  out vec2 v_uv;
+
+  uniform OutlineVert {
+    float lineWidth;
+    float depthBias;
+  };
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    float width = lineWidth * 0.001;
+
+    #if USE_POSITION_SCALING
+      vec3 dir = normalize(In.position.xyz);
+      float flip = dot(dir, normalize(In.normal)) < 0.0 ? -1.0 : 1.0;
+      In.position.xyz += flip * dir * width * 2.0;
+      vec4 pos = cc_matViewProj * cc_matWorld * In.position;
+    #else
+      In.position.xyz += normalize(In.normal) * width;
+      vec4 pos = cc_matViewProj * cc_matWorld * In.position;
+    #endif
+
+    pos.z -= depthBias * 0.002;
+
+    v_uv = In.uv;
+
+    return pos;
+  }
+}%
+
+CCProgram outline-fs %{
+  precision highp float;
+  #include <cc-global>
+  #include <encodings>
+  #include <cc-lights>
+
+  in vec2 v_uv;
+
+  uniform OutlineFrag {
+    vec4 outlineBaseColor;
+  };
+
+  #if USE_OUTLINE_BASE_COLOR_MAP
+    uniform sampler2D outlineBaseColorMap;
+  #endif
+
+  vec4 frag () {
+    vec4 color = outlineBaseColor;
+    
+    #if CC_NUM_DIR_LIGHTS > 0
+    for (int i = 0; i < CC_NUM_DIR_LIGHTS; i++) {
+        color *= cc_dirLightColor[i];
+    }
+    #endif
+
+    #if USE_OUTLINE_BASE_COLOR_MAP
+      vec4 texColor = texture(outlineBaseColorMap, v_uv);
+      texColor = TEXEL_TO_LINEAR(texColor);
+      color *= texColor;
+    #endif
+
+    return vec4(color.rgb, 1.0);
+  }
+}%
+
+CCProgram toon-vs %{
+  precision highp float;
+  #include <cc-global>
+  #include <cc-local>
+  #include <input-standard>
+
+  out vec3 v_position;
+  out vec2 v_uv;
+  out vec3 v_normal;
+  
+  #if USE_NORMAL_MAP
+    out vec3 v_tangent;
+    out vec3 v_bitangent;
+  #endif
+
+  uniform ToonVert {
+    vec4 tilingOffset;
+  };
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    vec4 pos = cc_matWorld * In.position;
+    v_position = pos.xyz;
+    v_uv = In.uv * tilingOffset.xy + tilingOffset.zw;
+
+    v_normal = (cc_matWorldIT * vec4(In.normal, 0.0)).xyz;
+    #if USE_NORMAL_MAP
+      v_tangent = normalize((cc_matWorldIT * vec4(In.tangent.xyz, 0.0)).xyz);
+      v_bitangent = cross(v_normal, v_tangent) * In.tangent.w; // note the cross order
+    #endif
+
+    return cc_matViewProj * pos;
+  }
+}%
+
+CCProgram toon-fs %{
+  precision highp float;
+  #include <cc-global>
+  #include <shading-toon>
+  #include <encodings>
+
+  in vec3 v_position;
+  in vec2 v_uv;
+
+  in vec3 v_normal;
+  #if USE_NORMAL_MAP
+    in vec3 v_tangent;
+    in vec3 v_bitangent;
+    uniform sampler2D normalMap;
+  #endif
+
+  #if USE_BASE_COLOR_MAP
+    uniform sampler2D baseColorMap;
+  #endif
+  #if USE_SPECULAR_MAP
+    uniform sampler2D specularMap;
+  #endif
+  #if USE_EMISSIVE_MAP
+    uniform sampler2D emissiveMap;
+  #endif
+
+  uniform ToonFrag {
+    vec4 colorScale; // xyz: color scale, w: cutoff
+    vec4 specular; // xyz: specular color, w: power
+    vec4 emissive;
+    vec4 shadowColor;
+    vec4 highlightColor;
+    float specularThreshold;
+    float shadowIntensity;
+    float lightThreshold;
+    float lightSmoothness;
+  };
+
+  void surf (out ToonSurface s) {
+    #if USE_BASE_COLOR_MAP
+      s.baseColor = TEXEL_TO_LINEAR(texture(baseColorMap, v_uv));
+    #else
+      s.baseColor = highlightColor;    
+    #endif
+
+    s.normal = normalize(v_normal);
+    #if USE_NORMAL_MAP
+      vec3 nmmp = texture(normalMap, v_uv).xyz - vec3(0.5);
+      s.normal = normalize(
+        nmmp.x * normalize(v_tangent) +
+        nmmp.y * normalize(v_bitangent) +
+        nmmp.z * s.normal);
+    #endif
+
+    s.position = v_position;
+
+    s.specular = specular.rgb * specular.a;
+    #if USE_SPECULAR_MAP
+      s.specular *= TEXEL_TO_LINEAR(texture(specularMap, v_uv)).rgb;
+    #endif
+
+    s.emissive = emissive.rgb;
+    #if USE_EMISSIVE_MAP
+      s.emissive *= TEXEL_TO_LINEAR(texture(emissiveMap, v_uv)).rgb;
+    #endif
+
+    s.lightThreshold = lightThreshold;
+    s.lightSmoothness = lightSmoothness;
+    s.shadowColor = shadowColor.rgb;
+    s.highlightColor = highlightColor.rgb;
+    s.shadowIntensity = shadowIntensity;
+    s.specularThreshold = specularThreshold;
+  }
+
+  vec4 frag () {
+    ToonSurface s; 
+    surf(s);
+    vec4 color = CCToonShading(s);
+    return LINEAR_TO_OUTPUT_TEXEL(color);
+  }
+}%

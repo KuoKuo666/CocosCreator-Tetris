@@ -1,0 +1,91 @@
+// Copyright (c) 2017-2019 Xiamen Yaji Software Co., Ltd.
+// 用于受光照的Gizmo物体渲染，如position,scale的三个坐标轴
+CCEffect %{
+  techniques:
+  - stages:
+      - transparent
+    passes:
+      - vert: vs
+        frag: fs
+        depthStencilState:
+          depthTest: false
+          depthWrite: false
+        blendState:
+          targets:
+          - blend: true
+            blendEq: add
+            blendAlphaEq: add
+            blendSrcAlpha: one
+            blendDstAlpha: one_minus_src_alpha
+        rasterizerState:
+          cullMode: none
+        properties:
+          diffuseColor: { value: [1, 1, 1, 1], inspector: { type: color } }
+}%
+
+CCProgram vs %{
+  precision highp float;
+
+  #include <cc-global>
+  #include <cc-local>
+
+  varying vec3 v_worldNormal;
+  varying vec3 v_worldPosition;
+  varying vec3 v_localPosition;
+  varying vec3 v_right;
+  varying vec3 v_up;
+  varying vec3 v_forward;
+
+  attribute vec3 a_position;
+  attribute vec3 a_normal;
+
+  void main () {
+    vec4 pos = vec4(a_position, 1);
+
+    v_localPosition = a_position;
+    v_worldPosition = (cc_matWorld * pos).xyz;
+    v_worldNormal = (cc_matWorldIT * vec4(a_normal, 0)).xyz;
+    v_right = vec3(cc_matView[0][0], cc_matView[1][0], cc_matView[2][0]);
+    v_up = vec3(cc_matView[0][1], cc_matView[1][1], cc_matView[2][1]);
+    v_forward = vec3(cc_matView[0][2], cc_matView[1][2], cc_matView[2][2]);
+
+    gl_Position = cc_matViewProj * cc_matWorld * pos;
+  }
+}%
+
+CCProgram fs %{
+  precision highp float;
+  
+  #include <encodings>
+  #include <rect-area-light>
+  #include <cc-global>
+
+  uniform DIFFUSE_COLOR {
+    vec4 diffuseColor;
+  }
+
+  varying vec3 v_worldNormal;
+  varying vec3 v_worldPosition;
+  varying vec3 v_localPosition;
+  varying vec3 v_right;
+  varying vec3 v_up;
+  varying vec3 v_forward;
+
+  void main () {
+    vec3 N = normalize(v_worldNormal);
+    vec3 V = normalize(cc_cameraPos.xyz - v_worldPosition);
+
+    // vec3 L = normalize(cross(v_forward, vec3(0, 1, 0)));
+    // vec3 diffuse = color.rgb * (0.2 + max(0.0, dot(N, L)) * 0.8);
+
+    vec3 points[4];
+    vec3 up = vec3(0, 1, 0);
+    points[0] = (v_forward * 3.0 + v_right + up) * 40.0;
+    points[1] = (v_forward * 3.0 - v_right + up) * 40.0;
+    points[2] = (v_forward * 3.0 - v_right - up) * 40.0;
+    points[3] = (v_forward * 3.0 + v_right - up) * 40.0;
+    vec3 diffuse = diffuseColor.rgb * (0.2 + LTC_Evaluate(N, V, v_localPosition, mat3(1), points) * 0.8);
+
+    gl_FragColor = LINEAR_TO_OUTPUT_TEXEL(vec4(diffuse, diffuseColor.a));
+  }
+}%

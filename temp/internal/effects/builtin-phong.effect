@@ -1,0 +1,33 @@
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: phong-vs
+      frag: phong-fs
+      rasterizerState:
+        cullMode: back
+      depthStencilState:
+        depthTest: true
+        depthWrite: true
+      properties:
+        alphaThreshold: { value: 0.5 }
+        mainTiling: { value: [1, 1] }
+        mainOffset: { value: [0, 0] }
+        diffuseColor: { value: [1, 1, 1, 1], inspector: { type: color } }
+        diffuseTexture: { value: white }
+        specularColor: { value: [1, 1, 1, 1], inspector: { type: color } }
+        specularTexture: { value: white }
+        emissiveColor: { value: [0, 0, 0, 1], inspector: { type: color } }
+        emissiveTexture: { value: white }
+        glossiness: { value: 10 }
+        normalTexture: { value: white }
+  - stages:
+      - shadowcast
+    passes:
+      - vert: shadow-map-vs
+        frag: shadow-map-fs
+        rasterizerState:
+          cullMode: back
+        depthStencilState:
+          depthTest: true
+          depthWrite: true
+}%

@@ -445,8 +445,8 @@
     "relativePath": "model/primitives.fbx"
   },
   "906ffad3-d7f7-4325-9d1e-64eda217f8a4": {
-    "asset": 1585843881989,
-    "meta": 1585843881994,
+    "asset": 1585922249494,
+    "meta": 1585922249498,
     "relativePath": "game.fire"
   },
   "5c4d170c-3e86-4df7-953d-72850a384cc9": {
@@ -549,16 +549,6 @@
     "meta": 1585481622212,
     "relativePath": "prefab"
   },
-  "d436c7cb-bdc0-4539-96ac-d2671838dac8": {
-    "asset": 1585483728413,
-    "meta": 1585483985295,
-    "relativePath": "script/config.ts"
-  },
-  "5207362a-b942-44d5-98be-e89c370c6ba9": {
-    "asset": 1585483923199,
-    "meta": 1585483985410,
-    "relativePath": "script/main.ts"
-  },
   "3191ea21-0284-4dbe-8471-bf2798e064cc": {
     "asset": 1585483791800,
     "meta": 1585483985427,
@@ -569,14 +559,39 @@
     "meta": 1585483985443,
     "relativePath": "script/render.ts"
   },
-  "3f519470-c3e0-4d0a-a81f-21de7e5f7d3e": {
-    "asset": 1585843802781,
-    "meta": 1585843873834,
-    "relativePath": "script/enum.ts"
-  },
   "f95c82c9-7168-4ff8-8c66-a2fb47a4c170": {
     "asset": 1585843857345,
     "meta": 1585843873835,
     "relativePath": "script/touch.ts"
+  },
+  "3f519470-c3e0-4d0a-a81f-21de7e5f7d3e": {
+    "asset": 1585843894651,
+    "meta": 1585844304652,
+    "relativePath": "script/enum.ts"
+  },
+  "5207362a-b942-44d5-98be-e89c370c6ba9": {
+    "asset": 1585844209923,
+    "meta": 1585844304652,
+    "relativePath": "script/main.ts"
+  },
+  "46190147-92aa-4ec7-b329-eb53502ec24e": {
+    "asset": 1585919707614,
+    "meta": 1585919707614,
+    "relativePath": "tool"
+  },
+  "7367abbb-bb3e-4970-8794-9472e6f22e19": {
+    "asset": 1585922246202,
+    "meta": 1585922246208,
+    "relativePath": "tool.fire"
+  },
+  "be8f254b-83ca-42a0-9fdb-0a1a5ae06421": {
+    "asset": 1585922142158,
+    "meta": 1585922144532,
+    "relativePath": "tool/config-tool.ts"
+  },
+  "d436c7cb-bdc0-4539-96ac-d2671838dac8": {
+    "asset": 1585922209807,
+    "meta": 1585922222512,
+    "relativePath": "script/config.ts"
   }
 }
