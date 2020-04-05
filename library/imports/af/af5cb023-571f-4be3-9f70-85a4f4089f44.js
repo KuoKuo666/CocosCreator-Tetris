@@ -36,8 +36,9 @@ var Render = /** @class */ (function (_super) {
     Render.prototype.render = function (dataArray) {
         for (var i = 0; i < config_1.config.row; i++) {
             for (var j = 0; j < config_1.config.col; j++) {
-                var type = dataArray[i][j];
-                this.itemArray[i][j].getComponent(cc.Sprite).spriteFrame = this.itemSpriteFrames[type - 1];
+                var color = dataArray[i][j];
+                // 拖入图片 0-6，颜色枚举 1-7
+                this.itemArray[i][j].getComponent(cc.Sprite).spriteFrame = this.itemSpriteFrames[color - 1];
             }
         }
     };

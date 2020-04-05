@@ -3,18 +3,18 @@ cc._RF.push(module, '3f519Rww+BNCqgfId5+X30+', 'enum', __filename);
 // script/enum.ts
 
 Object.defineProperty(exports, "__esModule", { value: true });
-/** 不渲染与7个类型 */
-var ItemType;
-(function (ItemType) {
-    ItemType[ItemType["NULL"] = 0] = "NULL";
-    ItemType[ItemType["SHAPE1"] = 1] = "SHAPE1";
-    ItemType[ItemType["SHAPE2"] = 2] = "SHAPE2";
-    ItemType[ItemType["SHAPE3"] = 3] = "SHAPE3";
-    ItemType[ItemType["SHAPE4"] = 4] = "SHAPE4";
-    ItemType[ItemType["SHAPE5"] = 5] = "SHAPE5";
-    ItemType[ItemType["SHAPE6"] = 6] = "SHAPE6";
-    ItemType[ItemType["SHAPE7"] = 7] = "SHAPE7";
-})(ItemType = exports.ItemType || (exports.ItemType = {}));
+/** 不渲染与7个颜色 */
+var ItemColor;
+(function (ItemColor) {
+    ItemColor[ItemColor["NULL"] = 0] = "NULL";
+    ItemColor[ItemColor["Color1"] = 1] = "Color1";
+    ItemColor[ItemColor["Color2"] = 2] = "Color2";
+    ItemColor[ItemColor["Color3"] = 3] = "Color3";
+    ItemColor[ItemColor["Color4"] = 4] = "Color4";
+    ItemColor[ItemColor["Color5"] = 5] = "Color5";
+    ItemColor[ItemColor["Color6"] = 6] = "Color6";
+    ItemColor[ItemColor["Color7"] = 7] = "Color7";
+})(ItemColor = exports.ItemColor || (exports.ItemColor = {}));
 /** 触摸事件-上下左右滑动 */
 var TouchEvent;
 (function (TouchEvent) {

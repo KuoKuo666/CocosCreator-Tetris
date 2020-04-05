@@ -1,16 +1,16 @@
 import { config } from "./config"
 import Render from "./render"
-import { TouchEvent, ItemType, NodeUrl, MusicEvent } from "./enum"
+import { TouchEvent, ItemColor, NodeUrl, MusicEvent } from "./enum"
 
 const {ccclass, property} = cc._decorator
 
 export interface CurrentShapeData {
     /** 指向当前形状中心 */
     center: cc.Vec2,
-    /** 当前颜色形状翻转下标，0-3，可以翻转 4 种形态 */
+    /** 当前形状翻转下标，0-3，可以翻转 4 种形态 */
     index: number,
     /** 什么颜色的方块 */
-    type: ItemType
+    color: ItemColor
 }
 
 @ccclass
@@ -23,13 +23,13 @@ export default class Main extends cc.Component {
     startPanel: cc.Node = undefined
 
     /** 二维数组 */
-    dataArray: ItemType[][] = []
+    dataArray: ItemColor[][] = []
 
     /** 当前形状 */
     currentShape: CurrentShapeData = {
         center: cc.v2(0, 0),
         index: 0,
-        type: ItemType.NULL
+        color: ItemColor.NULL
     }
 
     /** 计时变量 */
@@ -79,7 +79,7 @@ export default class Main extends cc.Component {
         for (let i = 0; i < config.row; i++) {
             this.dataArray[i] = []
             for (let j = 0; j < config.col; j++) {
-                this.dataArray[i][j] = ItemType.NULL
+                this.dataArray[i][j] = ItemColor.NULL
             }
         }
     }
@@ -88,7 +88,7 @@ export default class Main extends cc.Component {
     randomOneShape () {
         this.currentShape.center.set(config.startPos)
         // 随机类型
-        this.currentShape.type = Math.floor(1 + 7 * Math.random())
+        this.currentShape.color = Math.floor(1 + 7 * Math.random())
         // 随机开始的下标
         this.currentShape.index = Math.floor(4 * Math.random())
         // 检测游戏结束
@@ -108,25 +108,25 @@ export default class Main extends cc.Component {
 
     /** 根据当前中心点和形状类型清除数据 */
     clearCurrentData (currentShape: CurrentShapeData) {
-        const { center, type, index } = currentShape
-        const shape = `shape${type}`
+        const { center, color, index } = currentShape
+        const shape = `shape${color}`
         const shapeData: cc.Vec2[][] = config[shape]
         shapeData[index].forEach(ele => {
             const row = center.x + ele.x
             const col = center.y + ele.y
-            this.dataArray[row][col] = ItemType.NULL
+            this.dataArray[row][col] = ItemColor.NULL
         })
     }
 
     /** 根据当前中心点和形状类型加入数据 */
     setCurrentData (currentShape: CurrentShapeData) {
-        const { center, type, index } = currentShape
-        const shape = `shape${type}`
+        const { center, color, index } = currentShape
+        const shape = `shape${color}`
         const shapeData: cc.Vec2[][] = config[shape]
         shapeData[index].forEach(ele => {
             const row = center.x + ele.x
             const col = center.y + ele.y
-            this.dataArray[row][col] = type
+            this.dataArray[row][col] = color
         })
         // 刷新视图
         this.render()
@@ -134,8 +134,8 @@ export default class Main extends cc.Component {
 
     /** 判断传入中心点和形状类型是否合理 */
     isCurrentDataOK (currentShape: CurrentShapeData): boolean {
-        const { center, type, index } = currentShape
-        const shape = `shape${type}`
+        const { center, color, index } = currentShape
+        const shape = `shape${color}`
         const shapeData: cc.Vec2[][] = config[shape]
         const shapeIndexDate: cc.Vec2[] = shapeData[index]
         for (let i = 0; i < shapeIndexDate.length; i++) {
@@ -147,7 +147,7 @@ export default class Main extends cc.Component {
             if (col < 0 || col >= config.col) {
                 return false
             }
-            if (this.dataArray[row][col] !== ItemType.NULL) {
+            if (this.dataArray[row][col] !== ItemColor.NULL) {
                 return false
             }
         }
@@ -190,7 +190,7 @@ export default class Main extends cc.Component {
         while (row !== 0) {
             let isFull: boolean = true
             for (let j = 0; j < config.col; j++) {
-                if (this.dataArray[row][j] === ItemType.NULL) {
+                if (this.dataArray[row][j] === ItemColor.NULL) {
                     isFull = false
                 }
             }

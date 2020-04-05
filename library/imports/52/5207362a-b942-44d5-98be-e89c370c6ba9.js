@@ -19,7 +19,7 @@ var Main = /** @class */ (function (_super) {
         _this.currentShape = {
             center: cc.v2(0, 0),
             index: 0,
-            type: enum_1.ItemType.NULL
+            color: enum_1.ItemColor.NULL
         };
         /** 计时变量 */
         _this.time = 0;
@@ -62,7 +62,7 @@ var Main = /** @class */ (function (_super) {
         for (var i = 0; i < config_1.config.row; i++) {
             this.dataArray[i] = [];
             for (var j = 0; j < config_1.config.col; j++) {
-                this.dataArray[i][j] = enum_1.ItemType.NULL;
+                this.dataArray[i][j] = enum_1.ItemColor.NULL;
             }
         }
     };
@@ -71,7 +71,7 @@ var Main = /** @class */ (function (_super) {
         var _this = this;
         this.currentShape.center.set(config_1.config.startPos);
         // 随机类型
-        this.currentShape.type = Math.floor(1 + 7 * Math.random());
+        this.currentShape.color = Math.floor(1 + 7 * Math.random());
         // 随机开始的下标
         this.currentShape.index = Math.floor(4 * Math.random());
         // 检测游戏结束
@@ -92,33 +92,33 @@ var Main = /** @class */ (function (_super) {
     /** 根据当前中心点和形状类型清除数据 */
     Main.prototype.clearCurrentData = function (currentShape) {
         var _this = this;
-        var center = currentShape.center, type = currentShape.type, index = currentShape.index;
-        var shape = "shape" + type;
+        var center = currentShape.center, color = currentShape.color, index = currentShape.index;
+        var shape = "shape" + color;
         var shapeData = config_1.config[shape];
         shapeData[index].forEach(function (ele) {
             var row = center.x + ele.x;
             var col = center.y + ele.y;
-            _this.dataArray[row][col] = enum_1.ItemType.NULL;
+            _this.dataArray[row][col] = enum_1.ItemColor.NULL;
         });
     };
     /** 根据当前中心点和形状类型加入数据 */
     Main.prototype.setCurrentData = function (currentShape) {
         var _this = this;
-        var center = currentShape.center, type = currentShape.type, index = currentShape.index;
-        var shape = "shape" + type;
+        var center = currentShape.center, color = currentShape.color, index = currentShape.index;
+        var shape = "shape" + color;
         var shapeData = config_1.config[shape];
         shapeData[index].forEach(function (ele) {
             var row = center.x + ele.x;
             var col = center.y + ele.y;
-            _this.dataArray[row][col] = type;
+            _this.dataArray[row][col] = color;
         });
         // 刷新视图
         this.render();
     };
     /** 判断传入中心点和形状类型是否合理 */
     Main.prototype.isCurrentDataOK = function (currentShape) {
-        var center = currentShape.center, type = currentShape.type, index = currentShape.index;
-        var shape = "shape" + type;
+        var center = currentShape.center, color = currentShape.color, index = currentShape.index;
+        var shape = "shape" + color;
         var shapeData = config_1.config[shape];
         var shapeIndexDate = shapeData[index];
         for (var i = 0; i < shapeIndexDate.length; i++) {
@@ -130,7 +130,7 @@ var Main = /** @class */ (function (_super) {
             if (col < 0 || col >= config_1.config.col) {
                 return false;
             }
-            if (this.dataArray[row][col] !== enum_1.ItemType.NULL) {
+            if (this.dataArray[row][col] !== enum_1.ItemColor.NULL) {
                 return false;
             }
         }
@@ -172,7 +172,7 @@ var Main = /** @class */ (function (_super) {
         while (row !== 0) {
             var isFull = true;
             for (var j = 0; j < config_1.config.col; j++) {
-                if (this.dataArray[row][j] === enum_1.ItemType.NULL) {
+                if (this.dataArray[row][j] === enum_1.ItemColor.NULL) {
                     isFull = false;
                 }
             }

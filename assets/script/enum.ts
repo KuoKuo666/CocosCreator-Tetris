@@ -1,13 +1,13 @@
-/** 不渲染与7个类型 */
-export enum ItemType {
+/** 不渲染与7个颜色 */
+export enum ItemColor {
     NULL = 0,
-    SHAPE1,
-    SHAPE2,
-    SHAPE3,
-    SHAPE4,
-    SHAPE5,
-    SHAPE6,
-    SHAPE7,
+    Color1,
+    Color2,
+    Color3,
+    Color4,
+    Color5,
+    Color6,
+    Color7,
 }
 
 /** 触摸事件-上下左右滑动 */

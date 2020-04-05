@@ -1,4 +1,5 @@
 import { config } from "./config"
+import { ItemColor } from "./enum"
 
 const {ccclass, property} = cc._decorator
 
@@ -34,11 +35,12 @@ export default class Render extends cc.Component {
     }
 
     /** 根据传入二维数组进行渲染 */
-    render (dataArray: number[][]) {
+    render (dataArray: ItemColor[][]) {
         for (let i = 0; i < config.row; i++) {
             for (let j = 0; j < config.col; j++) {
-                const type = dataArray[i][j]
-                this.itemArray[i][j].getComponent(cc.Sprite).spriteFrame = this.itemSpriteFrames[type - 1]
+                const color = dataArray[i][j]
+                // 拖入图片 0-6，颜色枚举 1-7
+                this.itemArray[i][j].getComponent(cc.Sprite).spriteFrame = this.itemSpriteFrames[color - 1]
             }
         }
     }
